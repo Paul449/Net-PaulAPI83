@@ -21,7 +21,8 @@ The purpose of this challenge is to save and retrieve users and thoughts posted 
 
 ## Usage
 
-    This API will work
+This API is designed as an example of how social media platforms can provide their api to offer
+a service to their client when trying to use any platform
 
 ## Collaboration
 
