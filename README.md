@@ -17,8 +17,20 @@ The purpose of this challenge is to save and retrieve users and thoughts posted 
 
 ## Installation
 
+    N/A
+
 ## Usage
+
+    This API will work
+
+## Collaboration
+
+    N/A
 
 ## Walkthrough Video
 
+demonstration:
+
 ## Github Repository
+
+Git Repo:(https://github.com/Paul449/Net-PaulAPI83)
