@@ -1,0 +1,25 @@
+{
+  "name": "net-paulapi83",
+  "version": "1.0.0",
+  "description": "social media API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paul449/Net-PaulAPI83.git"
+  },
+  "author": "Paul Bilbatua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Paul449/Net-PaulAPI83/issues"
+  },
+  "homepage": "https://github.com/Paul449/Net-PaulAPI83#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.6.2",
+    "mongoose": "^8.4.0"
+  }
+}
