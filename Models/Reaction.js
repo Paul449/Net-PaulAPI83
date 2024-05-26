@@ -1,18 +1,16 @@
 //importing schema and model packages from mongoose
 const { ObjectId } = require('bson');
-const {Schema,Model} = require('mongoose');
+const {Schema, Types} = require('mongoose');
 //creating schema for Reaction model
 const ReactionSchema = new Schema({
     ReactionID:{
-        data:ObjectId,
-        default:Schema.Types.ObjectId 
+        type:Schema.Types.ObjectId,
+        default:() => new Types.ObjectId()
     },
     reactionBody:{
-        data:String,
+        type:String,
         required:true,
-        validate:{
-            max:[280,"280 character maximum"]
-        }
+        maxLength:280
     },
     username:{
         type:String,
@@ -22,14 +20,18 @@ const ReactionSchema = new Schema({
         type:Date,
         default: Date.now(), // setting
         get:function(t){ //getter method to format the timestamp on query
-
+            
         }
     }
 },
 {
-    timestamps:true,
+    toJSON:{
 
+        getters:true,
+    },
+    timestamps:true,
+    id:false,
 });
 //exporting Reaction model
-module.exports = Reaction;
+module.exports = ReactionSchema;
 
