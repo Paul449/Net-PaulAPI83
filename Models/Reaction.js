@@ -18,9 +18,12 @@ const ReactionSchema = new Schema({
     },
     createdAt:{
         type:Date,
-        default: Date.now(), // setting
-        get:function(t){ //getter method to format the timestamp on query
-            
+        default: Date.now, // setting
+        get:function(timestamp){ //getter method to format the timestamp on query
+           return new Intl.DateTimeFormat('en-US',{
+            dateStyle:'full',
+            timeStyle:'short'
+           }).format(timestamp)
         }
     }
 },
