@@ -11,7 +11,7 @@ Router.get('/api/user/:_id',(req,res)=>{
 
 });
 // POST a new user
-Router.post('/api/user/:_id',(req,res)=>{
+Router.post('/api/user',(req,res)=>{
 
 });
 // PUT to update a user by its _id
