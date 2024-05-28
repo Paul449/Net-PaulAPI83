@@ -5,12 +5,12 @@ const UserSchema = new Schema({
     username:{
         type: String,
         required: true,
-        Unique: true,
+        unique: true,
         trim: true
     },
     email:{
         type: String,
-        Unique: true,
+        unique: true,
         required: true,
         validate:{
             validator:function(v){
@@ -18,30 +18,32 @@ const UserSchema = new Schema({
             }
         }
     },
-    thoughts:{
-        reference:{
+    thoughts:[
+
+        {
             type:Schema.Types.ObjectId,
-            ref:'Thought',
+            ref:'thought',
         }
-    },
-    friends:{
-        reference:{
+    ],
+    friends:[ 
+        
+        {
             type:Schema.Types.ObjectId,
-            ref:'User',
+            ref:'user',
         }
-    },
+    ],
 },
 {
     toJSON:{
         virtuals:true
     },
-    id:true
+    id:false
 });
 //create virtual named friendCount to get the length of the user's friends array field on query.
 UserSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 })
 //create instance of user schema
-const User = model('User', UserSchema);
+const User = model('user', UserSchema);
 //exporting User model
 module.exports = User;

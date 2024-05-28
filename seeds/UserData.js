@@ -1,25 +1,26 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('../config/connection');
 const User = require('../Models/User');
-const Thought = require('../Models/Thought');
+//const ThoughtData = require('./ThoughtData');
 //const seeder = require('mongoose-seed');
 //database reference
 const UserData = [{
     username:'PaulBilbatua89',
     email:'paul_bilbatua@hotmail.com',
-    thoughts:[Thought._id],
+    thoughts:[],
     friends:[],
     
 },
 {
     username:'GeraBiro4675',
     email:'rodbilger40@hotmail.com',
-    thoughts:[Thought._id],
+    thoughts:[],
     friends:[],
 },
 {
     username:'Paulbiro5678',
     email:'software_bilbatua@hotmail.com',
-    thoughts:[Thought._id],
+    thoughts:[],
     friends:[],
 
 }];
