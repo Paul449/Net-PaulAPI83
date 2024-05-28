@@ -28,3 +28,6 @@ const seedThought = async function(){
     }
 }
 seedThought();
+
+//export seeding
+module.exports = ThoughtData;
