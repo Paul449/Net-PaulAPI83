@@ -1,5 +1,6 @@
 //import schema and types packages from mongoose to work with database datatypes and creating schema
 const {Schema, model} = require('mongoose');
+const mongoose = require('mongoose');
 // creating User model
 const UserSchema = new Schema({
     username:{
@@ -44,6 +45,6 @@ UserSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 })
 //create instance of user schema
-const User = model('user', UserSchema);
+const User = mongoose.model('user', UserSchema);
 //exporting User model
 module.exports = User;

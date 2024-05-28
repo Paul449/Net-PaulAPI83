@@ -1,5 +1,6 @@
 //importing schema and types packages from mongoose
 const {Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const ReactionSchema = require('./Reaction');
 //schema for thoughts
 const thoughtSchema = new Schema({
@@ -31,7 +32,7 @@ thoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length; //retrieving reactions from users length
 })
 //create thought model instance from schema
-const thought = model('thought',thoughtSchema);
+const thought = mongoose.model('thought',thoughtSchema);
 //export model
 module.exports = thought;
 
