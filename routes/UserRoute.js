@@ -1,5 +1,5 @@
 const { Router } = require('express');
-
+const User = require('../Models/User')
 //importing express router
 const express = require('express').Router();
 // get api routes
