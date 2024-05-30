@@ -1,14 +1,21 @@
 //importing express library
 const express = require('express');
-//require models
-const User = require('./Models');
-const Thought = require('./Models');
+//database connection mongoose
+const db = require('./config/connection');
+//require routes
+const routes = require('./routes')
 //port number
 const PORT = process.env.PORT||3002;
 //applying express to our app
 const app = express();
-//
-app.use(express.urlencoded({extended:true}));
 //middleware for incoming requests and parsing each one to JSON format
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 //listen to app through this port
+app.use(routes);
+//run application throught port 3002
+db.once('enable',()=>{
+    app.listen(PORT,()=>{
+        console.log(`listening on port:${PORT}`)
+    });
+});
