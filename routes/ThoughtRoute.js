@@ -9,17 +9,17 @@ const Router = require('express').Router();
 // GET to get all thoughts
 Router.get('/',async (req,res)=>{
     try{
-    let thoughts = await Thought.find({}).populate('thought')
+    let thoughts = await Thought.find({})
     res.status(200).json(thoughts)
     }catch(err){
-        res.status(500).json({message:'internal server error'},err)
+        res.status(500).json('internal server error',err)
     }
 });
 
 // GET to get a single thought by its _id
 Router.get('/:thoughtId',async(req,res)=>{
     try{
-    let thoughts = await Thought.findOne({_id:req.params.thoughtId}).populate('thought')
+    let thoughts = await Thought.findOne({_id:req.params.thoughtId})
     if(!thoughts){
         return res.status(404).json({ message: 'this thought does not exist' });
     }

@@ -2,7 +2,7 @@
 const express = require('express');
 //database connection mongoose
 const db = require('./config/connection');
-const seeds = require('./seeds');
+//const seeds = require('./seeds');
 //require routes
 const routes = require('./routes')
 //port number
