@@ -7,7 +7,7 @@ const path = require('path');
 //defining router from express
 const Router = require('express').Router();
 // GET to get all thoughts
-Router.get('/api/thoughts',async (req,res)=>{
+Router.get('/',async (req,res)=>{
     try{
     let thoughts = await Thought.find({}).populate('thought')
     res.json(thoughts)
@@ -17,7 +17,7 @@ Router.get('/api/thoughts',async (req,res)=>{
 });
 
 // GET to get a single thought by its _id
-Router.get('/api/thoughts/:_id',async(req,res)=>{
+Router.get('/:thoughtId',async(req,res)=>{
     try{
     let thoughts = await Thought.findOne({_id:req.params.thoughtId}).populate('thought')
     if(thoughts !== true){
@@ -29,7 +29,7 @@ Router.get('/api/thoughts/:_id',async(req,res)=>{
     }
 });
 // POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
-Router.post('/api/thoughts',(req,res)=>{
+Router.post('/',(req,res)=>{
     try{
     let newThought = Thought.create(req.body)
     res.json(newThought)
@@ -38,7 +38,7 @@ Router.post('/api/thoughts',(req,res)=>{
     }
 });
 // PUT to update a thought by its _id
-Router.put('/api/thoughts/:_id',(req,res)=>{
+Router.put('/:thoughtId',(req,res)=>{
     try{
     let updateThought = Thought.findByIdAndUpdate(req.body.thoughtId, req.body,{new: true}) //body of thought id
     if(updateThought !== true){
@@ -50,7 +50,7 @@ Router.put('/api/thoughts/:_id',(req,res)=>{
     }
 });
 // DELETE to remove a thought by its _id
-Router.delete('/api/thoughts/:_id',(req,res)=>{
+Router.delete('/:thoughtId',(req,res)=>{
     try{
     let deleteThought = Thought.findByIdAndDelete({_id:req.params.thoughtId})
     res.json(deleteThought)
@@ -62,7 +62,7 @@ Router.delete('/api/thoughts/:_id',(req,res)=>{
 /*/api/thoughts/:thoughtId/reactions */
 
 // POST to create a reaction stored in a single thought's reactions array field
-Router.post('/api/thoughts/:thoughtId/reactions',async(req,res)=>{
+Router.post('/:thoughtId/reactions/:reactionsId',async(req,res)=>{
     try{
         let updateThought = await Thought.findOneAndUpdate(req.params.thoughtId,{$push:{reactions:req.body}},{new:true, useFindAndModify:false})
         if(!updateThought){
@@ -74,7 +74,7 @@ Router.post('/api/thoughts/:thoughtId/reactions',async(req,res)=>{
     }
 });
 // DELETE to pull and remove a reaction by the reaction's reactionId value
-Router.delete('/api/thoughts/:thoughtId/reactions',(req,res)=>{
+Router.delete('/:thoughtId/reactions/:reactionsId',(req,res)=>{
     try{
         let removeReaction = Thought.findOneAndUpdate({_id:req.params.thoughtId},{$pull:{reactions:req.body}},{new:true, useFindAndModify:false})
         if(!removeReaction){

@@ -1,9 +1,9 @@
-const Router = require('express').Router();
-const User = require('../Models/User');
 //importing express router
-const express = require('express').Router();
+const Router = require('express').Router();
+//importing user model
+const User = require('../Models/User');
 // get api routes
-Router.get('/api/user',async(req,res)=>{
+Router.get('/',async(req,res)=>{
     try{
         let Users = await User.find({}).populate('user')
         res.json(Users);
@@ -12,7 +12,7 @@ Router.get('/api/user',async(req,res)=>{
     }
 });
 // get a single user by its _id
-Router.get('/api/user/:_id',async(req,res)=>{
+Router.get('/:userId',async(req,res)=>{
     try{
         let UserID = await User.findById({_id:req.params.UserID})
         if(!UserID){
@@ -24,7 +24,7 @@ Router.get('/api/user/:_id',async(req,res)=>{
     }
 });
 // POST a new user
-Router.post('/api/user',async(req,res)=>{
+Router.post('/',async(req,res)=>{
    try{
     let newUser = await User.create(req.body);
     res.status(201).json(newUser);
@@ -34,7 +34,7 @@ Router.post('/api/user',async(req,res)=>{
 
 });
 // PUT to update a user by its _id
-Router.put('/api/user/:_id',async(req,res)=>{
+Router.put('/:userId',async(req,res)=>{
     try{
         let updateUser = await User.findByIdAndUpdate(req.params._id, req.body,{new:true})
         if(!updateUser){
@@ -46,7 +46,7 @@ Router.put('/api/user/:_id',async(req,res)=>{
     }
 });
 // DELETE to remove user by its _id
-Router.delete('/api/user/:_id',async(req,res)=>{
+Router.delete('/:userId',async(req,res)=>{
     try{
         let deleteUser = await User.findByIdAndDelete()
         if(!deleteUser){
@@ -62,7 +62,7 @@ Router.delete('/api/user/:_id',async(req,res)=>{
 /*/api/users/:userId/friends/:friendId */
 
 // POST to add a new friend to a user's friend list
-Router.post('/api/users/:userId/friends/:friendId',(req,res)=>{
+Router.post('/:userId/friends/:friendId',(req,res)=>{
     try{
 
     }catch(error){
@@ -71,7 +71,7 @@ Router.post('/api/users/:userId/friends/:friendId',(req,res)=>{
 });
 
 // DELETE to remove a friend from a user's friend list
-Router.delete('/api/users/:userId/friends/:friendId',(req,res)=>{
+Router.delete('/:userId/friends/:friendId',(req,res)=>{
     try{
 
     }catch(error){
