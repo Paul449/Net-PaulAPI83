@@ -1,5 +1,10 @@
+//calling router
+const Router = require('express').Router()
 //importing API routes
-const ThoughtRoute = require('./api/ThoughtRoute');
-const UserRoute = require('./api/UserRoute');
+const ThoughtRoute = require('./ThoughtRoute');
+const UserRoute = require('./UserRoute');
+//router endpoints
+Router.use(ThoughtRoute)
+Router.use(UserRoute)
 //exporting routes
-module.exports = {ThoughtRoute, UserRoute};
+module.exports = Router;
