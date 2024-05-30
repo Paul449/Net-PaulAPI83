@@ -15,7 +15,7 @@ app.use(express.json());
 //listen to app through this port
 app.use(routes);
 //run application throught port 3002
-db.once('enable',()=>{
+db.once('open',()=>{
     app.listen(PORT,()=>{
         console.log(`listening on port:${PORT}`)
     });

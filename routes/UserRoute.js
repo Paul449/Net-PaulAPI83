@@ -62,20 +62,24 @@ Router.delete('/:userId',async(req,res)=>{
 /*/api/users/:userId/friends/:friendId */
 
 // POST to add a new friend to a user's friend list
-Router.post('/:userId/friends/:friendId',(req,res)=>{
+Router.post('/:userId/friends/:friendId',async(req,res)=>{
     try{
-
+        let friend = await User.findOneAndUpdate({_id:req.params.userId},{$addToSet:{friends:req.body.friendId || req.params.friendId}},{new:true})
+        res.json(friend);
     }catch(error){
-        
+      res.status(500).json('internal server error:', error)  
     }
 });
 
 // DELETE to remove a friend from a user's friend list
-Router.delete('/:userId/friends/:friendId',(req,res)=>{
+Router.delete('/:userId/friends/:friendId',async(req,res)=>{
     try{
-
+        let friend = await User.findOneAndUpdate();
+        if(!friend){
+            res.status(404).json('friend not found, please try again')
+        }
     }catch(error){
-        
+       res.status(500).json('internal server error', error) 
     }
 });
 
