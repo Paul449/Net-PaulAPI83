@@ -40,20 +40,20 @@ Router.post('/',async(req,res)=>{
 // PUT to update a thought by its _id
 Router.put('/:thoughtId',async (req,res)=>{
     try{
-    let updateThought = await Thought.findByIdAndUpdate(req.body.thoughtId, req.body,{new: true}) //body of thought id
+    let updateThought = await Thought.findByIdAndUpdate(req.params.thoughtId, req.body,{new: true}) //body of thought id
     if(!updateThought){
-        return res.status(404).json({message:'Sorry, this thought does not exist, retry again!!!'})
+        res.status(404).json({message:'Sorry, this thought does not exist, retry again!!!'})
     }
-    res.json(updateThought)
+    return res.status(200).json({updateThought});
     }catch(err){
-        res.status(500).json({message:'internal server error'},err)
+        return res.status(500).json({message:'internal server error'},err)
     }
 });
 // DELETE to remove a thought by its _id
 Router.delete('/:thoughtId',async (req,res)=>{
     try{
     let deleteThought = await Thought.findByIdAndDelete({_id:req.params.thoughtId})
-    res.json(deleteThought)
+    res.status(200).json(deleteThought)
     }catch(err){
         res.status(500).json({message:'internal server error:'},err)
     }
