@@ -64,7 +64,7 @@ Router.delete('/:thoughtId',async (req,res)=>{
 // POST to create a reaction stored in a single thought's reactions array field
 Router.post('/:thoughtId/reactions',async(req,res)=>{
     try{
-        let updateThought = await Thought.findOneAndUpdate(req.params.thoughtId,{$push:{reactions:req.body}},{new:true, useFindAndModify:false})
+        let updateThought = await Thought.findOneAndUpdate({_id:req.params.thoughtId},{$push:{reactions:req.body}},{new:true, useFindAndModify:false})
         if(!updateThought){
             return res.status(404).json({message:'sorry, I could not be able to find this thought, retry later!!!'})
         }
