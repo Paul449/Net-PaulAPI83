@@ -64,7 +64,8 @@ Router.delete('/:userId',async(req,res)=>{
 // POST to add a new friend to a user's friend list
 Router.post('/:userId/friends/:friendId',async(req,res)=>{
     try{
-        let friend = await User.findOneAndUpdate({_id:req.params.userId},{$addToSet:{friends:req.body.friendId || req.params.friendId}},{new:true})
+        const friendId = req.body.friendId || req.params.friendId;
+        let friend = await User.findOneAndUpdate({_id:req.params.userId},{$addToSet:{friends:friendId}},{new:true})
         res.json(friend);
     }catch(error){
       res.status(500).json('internal server error:', error)  
@@ -74,10 +75,11 @@ Router.post('/:userId/friends/:friendId',async(req,res)=>{
 // DELETE to remove a friend from a user's friend list
 Router.delete('/:userId/friends/:friendId',async(req,res)=>{
     try{
-        let friend = await User.findOneAndUpdate({_id:params.userId},{$get:{friends:params.friendId}},{new:true});
+        let friend = await User.findOneAndUpdate({_id:req.params.userId},{$pull:{friends:req.params.friendId}},{new:true});
         if(!friend){
             res.status(404).json('friend not found, please try again')
         }
+        res.json(friend)
     }catch(error){
        res.status(500).json('internal server error', error) 
     }
