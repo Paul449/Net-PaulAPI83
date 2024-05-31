@@ -62,7 +62,7 @@ Router.delete('/:userId',async(req,res)=>{
 /*/api/users/:userId/friends/:friendId */
 
 // POST to add a new friend to a user's friend list
-Router.post('/:UserId/friends/:friendId',async(req,res)=>{
+Router.post('/:userId/friends/:friendId',async(req,res)=>{
     try{
         let friend = await User.findOneAndUpdate({_id:req.params.userId},{$addToSet:{friends:req.body.friendId || req.params.friendId}},{new:true})
         res.json(friend);
@@ -72,7 +72,7 @@ Router.post('/:UserId/friends/:friendId',async(req,res)=>{
 });
 
 // DELETE to remove a friend from a user's friend list
-Router.delete('/:UserId/friends/:friendId',async(req,res)=>{
+Router.delete('/:userId/friends/:friendId',async(req,res)=>{
     try{
         let friend = await User.findOneAndUpdate({_id:params.userId},{$get:{friends:params.friendId}},{new:true});
         if(!friend){
