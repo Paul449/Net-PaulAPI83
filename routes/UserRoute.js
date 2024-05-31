@@ -14,7 +14,7 @@ Router.get('/',async(req,res)=>{
 // get a single user by its _id
 Router.get('/:userId',async(req,res)=>{
     try{
-        let UserID = await User.findById({_id:req.params.UserID})
+        let UserID = await User.findById({_id:req.params.userId})
         if(!UserID){
             return res.status(404).json('user does not exist');
         }
@@ -62,7 +62,7 @@ Router.delete('/:userId',async(req,res)=>{
 /*/api/users/:userId/friends/:friendId */
 
 // POST to add a new friend to a user's friend list
-Router.post('/:userId/friends/:friendId',async(req,res)=>{
+Router.post('/:UserId/friends/:friendId',async(req,res)=>{
     try{
         let friend = await User.findOneAndUpdate({_id:req.params.userId},{$addToSet:{friends:req.body.friendId || req.params.friendId}},{new:true})
         res.json(friend);
@@ -72,7 +72,7 @@ Router.post('/:userId/friends/:friendId',async(req,res)=>{
 });
 
 // DELETE to remove a friend from a user's friend list
-Router.delete('/:userId/friends/:friendId',async(req,res)=>{
+Router.delete('/:UserId/friends/:friendId',async(req,res)=>{
     try{
         let friend = await User.findOneAndUpdate({_id:params.userId},{$get:{friends:params.friendId}},{new:true});
         if(!friend){
