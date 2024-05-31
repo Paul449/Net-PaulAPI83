@@ -30,7 +30,7 @@ a service to their client when trying to use any platform
 
 ## Walkthrough Video
 
-demonstration:
+demonstration: in the submitted assignment
 
 ## Github Repository
 
