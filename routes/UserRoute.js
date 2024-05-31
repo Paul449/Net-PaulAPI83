@@ -29,26 +29,26 @@ Router.post('/',async(req,res)=>{
     let newUser = await User.create(req.body);
     res.status(201).json(newUser);
    }catch(error){
-    res.status(500).json('internal server error', error)
+    res.status(500).json({message:'internal server error', error:error.message})
    }
 
 });
 // PUT to update a user by its _id
 Router.put('/:userId',async(req,res)=>{
     try{
-        let updateUser = await User.findByIdAndUpdate(req.params._id, req.body,{new:true})
+        let updateUser = await User.findOneAndUpdate({_id:req.params.userId}, req.body,{new:true})
         if(!updateUser){
             return res.status(404).json('user not found, please try again!!!');
         }
-        res.json(updateUser)
+        res.status(200).json(updateUser)
     }catch(error){
-        res.status(500).json('internal server error:',error)
+        res.status(500).json({message:'internal server error:',error:error.message})
     }
 });
 // DELETE to remove user by its _id
 Router.delete('/:userId',async(req,res)=>{
     try{
-        let deleteUser = await User.findByIdAndUpdate(req.params._id, req.body)
+        let deleteUser = await User.findOneAndDelete(req.params._id)
         if(!deleteUser){
             return res.status(404).json('user not found');
         }
