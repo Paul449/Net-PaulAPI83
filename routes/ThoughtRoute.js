@@ -29,7 +29,7 @@ Router.get('/:thoughtId',async(req,res)=>{
     }
 });
 // POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
-Router.post('/',async(req,res)=>{
+Router.post('/thoughts',async(req,res)=>{
     try{
     let newThought = await Thought.create(req.body)
     res.json(newThought)

@@ -5,7 +5,7 @@ const User = require('../Models/User');
 // get api routes
 Router.get('/',async(req,res)=>{
     try{
-        let Users = await User.find({}).populate('user')
+        let Users = await User.find({})
         res.json(Users);
     }catch(err){
         res.status(500).json('internal server error',err)
@@ -48,7 +48,7 @@ Router.put('/:userId',async(req,res)=>{
 // DELETE to remove user by its _id
 Router.delete('/:userId',async(req,res)=>{
     try{
-        let deleteUser = await User.findByIdAndDelete()
+        let deleteUser = await User.findByIdAndUpdate(req.params._id, req.body)
         if(!deleteUser){
             return res.status(404).json('user not found');
         }
@@ -74,7 +74,7 @@ Router.post('/:userId/friends/:friendId',async(req,res)=>{
 // DELETE to remove a friend from a user's friend list
 Router.delete('/:userId/friends/:friendId',async(req,res)=>{
     try{
-        let friend = await User.findOneAndUpdate();
+        let friend = await User.findOneAndUpdate({_id:params.userId},{$get:{friends:params.friendId}},{new:true});
         if(!friend){
             res.status(404).json('friend not found, please try again')
         }
